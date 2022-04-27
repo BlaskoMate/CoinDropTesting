@@ -17,7 +17,25 @@ public class ProfilePage {
     @FindBy(xpath = "//p[1]")
     WebElement emailField;
 
+    @FindBy(xpath = "//li[contains(text(),'Logout')]" )
+    WebElement logoutButton;
+
+    @FindBy(xpath = "//li[contains(text(),'Login')]" )
+    WebElement loginButton;
+
+
     public String getTextEmailField(){
         return emailField.getText();
     }
+
+    public void clickToLogOutButton(){
+        logoutButton.click();
+    }
+
+    public boolean isDisplayedLogInButton(){
+        return loginButton.isDisplayed();
+    }
+
+
+
 }

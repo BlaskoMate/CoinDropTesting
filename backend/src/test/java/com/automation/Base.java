@@ -6,6 +6,7 @@ import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import org.junit.BeforeClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -15,6 +16,7 @@ public class Base {
     private static  String password = "pizza";
     private static WebDriver driver;
     protected static HomePage homePage;
+
 
     public static void setUp(){
         System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver");
@@ -29,7 +31,14 @@ public class Base {
         driver.quit();
     }
 
-    public static void Login(){
-
+    public static void setUpAndLogin(){
+        System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("http://localhost:3000/login");
+        driver.manage().window().maximize();
+        homePage = new HomePage(driver);
+        driver.findElement(new By.ByXPath("//input[@name='email']")).sendKeys(email);
+        driver.findElement(new By.ByXPath("//input[@name='password']")).sendKeys(password);
+        driver.findElement(new By.ByXPath("//button[contains(text(),'Submit')]")).click();
     }
 }
