@@ -3,22 +3,21 @@ Feature: Login Tests
     Scenario: Empty credentials Login
         
         Given The user is on the login page
-        When do not write to email and password field
-        And click to 'Submit' button
-        Then the user sees top-right 'login' button
+        When Click to Submit button
+        Then the user sees top-right login button
 
     Scenario: Empty password Login
 
         Given The user is on the login page
-        When Enter the e-mail field with "automationTest1@gmail.com"
-        And Do not write to password field!
-        And And Click to 'Submit' button
-        Then The user sees top-right 'login' button
+        When Enter the e-mail field with "dummyEmail"
+        And Click to Submit button
+        Then the user sees top-right login button
 
+    @last
     Scenario: Successfully login
 
-        Given the user is logged out
-        And The user is on the login page
-        When I enter valid credentials and click to 'Submit' button
+        Given The user is on the login page
+        And the user is logged out
+        When I enter valid credentials(email:"dummyEmail" pass: "dummyPass") and click to Submit button
         And click to profile page
-        Then The e-mail matches the login e-mail
+        Then The e-mail matches the login e-mail("dummyEmail")
