@@ -1,23 +1,21 @@
 package StepDefinitons;
 
-import DriverUtil.DriverUtil;
+import Util.DriverUtil;
 import Pages.LoginPage;
 import Pages.ProfilePage;
+import Util.Urls;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.WebDriver;
 
 public class LoginTestStepDefinitions {
     protected static DriverUtil driverUtil;
     private final LoginPage loginPage = new LoginPage(driverUtil.getDriver());
     private final ProfilePage profilePage = new ProfilePage(driverUtil.getDriver());
-
 
     @Before
     public static void getDriver(){
@@ -32,7 +30,7 @@ public class LoginTestStepDefinitions {
 
     @Given("The user is on the login page")
     public void theUserIsOnTheLoginPage() {
-        driverUtil.getDriver().get("http://localhost:3000/login");
+        driverUtil.getDriver().get(Urls.LOGIN_PAGE.url);
     }
 
 
