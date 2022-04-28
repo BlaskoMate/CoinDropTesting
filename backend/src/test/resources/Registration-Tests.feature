@@ -9,17 +9,17 @@ Feature: Registration Tests
     Scenario: Successful registration
 
         Given The user is on the registration page
-        When Enter the e-mail field with "automationTest12734589@gmail.com"
-        And Enter the password fill with "abc1323"
+        When Enter the e-mail field with "DummyEmail"
+        And Enter the password fill with "DummyPassword"
         And Click to Submit button
         Then See on top-right Profile
         And Click to Profile
-        Then Validate user email, expected: "automationTest12734589@gmail.com"
+        Then Validate user email, expected: "DummyEmail"
 
     @last
     Scenario: Empty password Registration
 
         Given The user is on the registration page
-        When Enter the e-mail field with "automationTest23447589@gmail.com"
+        When Enter the e-mail field with "DummyEmail2"
         And Click to Submit button
         Then The user sees top-right login button
