@@ -51,6 +51,7 @@ public class LoginPage {
     }
 
     public void clickLogoutButton(){
+        WebDriverManager.waitUntilVisible(driver, logoutButton);
         logoutButton.click();
     }
 
@@ -59,7 +60,6 @@ public class LoginPage {
     }
 
     public boolean hasLoginButton() {
-        //WebDriverManager.waitUntilVisible(driver, logoutButton);
         return loginButton.isDisplayed();
     }
 }
