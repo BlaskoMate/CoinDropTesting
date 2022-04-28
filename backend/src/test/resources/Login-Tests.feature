@@ -2,7 +2,7 @@ Feature: Login Tests
 
     Scenario: Empty credentials Login
         
-        Given the user is on the login page
+        Given The user is on the login page
         When do not write to email and password field
         And click to 'Submit' button
         Then the user sees top-right 'login' button
@@ -18,7 +18,7 @@ Feature: Login Tests
     Scenario: Successfully login
 
         Given the user is logged out
-        And the user is on the login page
+        And The user is on the login page
         When I enter valid credentials and click to 'Submit' button
         And click to profile page
         Then The e-mail matches the login e-mail
