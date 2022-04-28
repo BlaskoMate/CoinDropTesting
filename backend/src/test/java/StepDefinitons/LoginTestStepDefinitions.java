@@ -1,23 +1,30 @@
 package StepDefinitons;
 
 import DriverUtil.DriverUtil;
+import Pages.LoginPage;
+import Pages.ProfilePage;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
 public class LoginTestStepDefinitions {
     protected static DriverUtil driverUtil;
+    private final LoginPage loginPage = new LoginPage(driverUtil.getDriver());
+    private final ProfilePage profilePage = new ProfilePage(driverUtil.getDriver());
+
 
     @Before
     public static void getDriver(){
         driverUtil = DriverUtil.getDriverUtil();
     }
 
-    @After
+    @After("@last")
     public static void closeDriver(){
         driverUtil.closeDriver();
         driverUtil = null;
@@ -25,56 +32,46 @@ public class LoginTestStepDefinitions {
 
     @Given("The user is on the login page")
     public void theUserIsOnTheLoginPage() {
-        driverUtil.getDriver().get("https://www.microsoft.com/hu-hu/");
+        driverUtil.getDriver().get("http://localhost:3000/login");
     }
 
-    @When("do not write to email and password field")
-    public void doNotWriteToEmailAndPasswordField() {
 
-    }
-
-    @And("click to {string} button")
-    public void clickToSubmitButton() {
-
-    }
-
-    @Then("the user sees top-right {string} button")
+    @Then("the user sees top-right login button")
     public void theUserSeesTopRightLoginButton() {
-
+        Assertions.assertTrue(loginPage.hasLoginButton());
     }
 
     @When("Enter the e-mail field with {string}")
-    public void enterTheEMailFieldWith(String arg0) {
-
+    public void enterTheEMailFieldWith(String email) {
+        loginPage.inputEmail(email);
     }
 
-    @And("Do not write to password field!")
-    public void doNotWriteToPasswordField() {
 
+    @And("Click to Submit button")
+    public void andClickToSubmitButton() throws InterruptedException {
+        loginPage.clickSubmit();
     }
 
-    @And("And Click to {string} button")
-    public void andClickToSubmitButton() {
 
-    }
-
-    @Given("the user is logged out")
+    @And("the user is logged out")
     public void theUserIsLoggedOut() {
-
-    }
-
-    @When("I enter valid credentials and click to {string} button")
-    public void iEnterValidCredentialsAndClickToSubmitButton() {
-
+        Assertions.assertTrue(loginPage.hasLoginButton());
     }
 
     @And("click to profile page")
     public void clickToProfilePage() {
-
+        loginPage.clickProfileButton();
     }
 
-    @Then("The e-mail matches the login e-mail")
-    public void theEMailMatchesTheLoginEMail() {
+    @When("I enter valid credentials\\(email:{string} pass: {string}) and click to Submit button")
+    public void iEnterValidCredentialsEmailPassAndClickToSubmitButton(String email, String password) {
+        loginPage.inputEmail(email);
+        loginPage.inputPassword(password);
+        loginPage.clickSubmit();
+    }
 
+    @Then("The e-mail matches the login e-mail\\({string})")
+    public void theEmailMatchesTheLoginEMail(String email) {
+        Assertions.assertEquals(email, profilePage.getEmailFromProfile());
     }
 }
