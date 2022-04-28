@@ -1,7 +1,7 @@
 package StepDefinitons;
 
 import Util.DriverUtil;
-import Pages.LoginPage;
+import Pages.LoginAndRegisterPage;
 import Pages.ProfilePage;
 import Util.Urls;
 import io.cucumber.java.After;
@@ -14,19 +14,8 @@ import org.junit.jupiter.api.Assertions;
 
 public class LoginTestStepDefinitions {
     protected static DriverUtil driverUtil;
-    private final LoginPage loginPage = new LoginPage(driverUtil.getDriver());
+    private final LoginAndRegisterPage loginAndRegisterPage = new LoginAndRegisterPage(driverUtil.getDriver());
     private final ProfilePage profilePage = new ProfilePage(driverUtil.getDriver());
-
-    @Before
-    public static void getDriver(){
-        driverUtil = DriverUtil.getDriverUtil();
-    }
-
-    @After("@last")
-    public static void closeDriver(){
-        driverUtil.closeDriver();
-        driverUtil = null;
-    }
 
     @Given("The user is on the login page")
     public void theUserIsOnTheLoginPage() {
@@ -36,36 +25,36 @@ public class LoginTestStepDefinitions {
 
     @Then("the user sees top-right login button")
     public void theUserSeesTopRightLoginButton() {
-        Assertions.assertTrue(loginPage.hasLoginButton());
+        Assertions.assertTrue(loginAndRegisterPage.hasLoginButton());
     }
 
     @When("Enter the e-mail field with {string}")
     public void enterTheEMailFieldWith(String email) {
-        loginPage.inputEmail(email);
+        loginAndRegisterPage.inputEmail(email);
     }
 
 
     @And("Click to Submit button")
     public void andClickToSubmitButton() throws InterruptedException {
-        loginPage.clickSubmit();
+        loginAndRegisterPage.clickSubmit();
     }
 
 
     @And("the user is logged out")
     public void theUserIsLoggedOut() {
-        Assertions.assertTrue(loginPage.hasLoginButton());
+        Assertions.assertTrue(loginAndRegisterPage.hasLoginButton());
     }
 
     @And("click to profile page")
     public void clickToProfilePage() {
-        loginPage.clickProfileButton();
+        loginAndRegisterPage.clickProfileButton();
     }
 
     @When("I enter valid credentials\\(email:{string} pass: {string}) and click to Submit button")
     public void iEnterValidCredentialsEmailPassAndClickToSubmitButton(String email, String password) {
-        loginPage.inputEmail(email);
-        loginPage.inputPassword(password);
-        loginPage.clickSubmit();
+        loginAndRegisterPage.inputEmail(email);
+        loginAndRegisterPage.inputPassword(password);
+        loginAndRegisterPage.clickSubmit();
     }
 
     @Then("The e-mail matches the login e-mail\\({string})")

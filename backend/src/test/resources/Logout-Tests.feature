@@ -1,5 +1,6 @@
 Feature: Successful logout
 
+    @last
     Scenario: Successful logout
 
         Given As valid user I am logged-in to CoinDrop(email:"DummyEmail" pass:"DummyEmail")

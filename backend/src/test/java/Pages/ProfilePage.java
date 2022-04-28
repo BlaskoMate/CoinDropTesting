@@ -1,5 +1,6 @@
 package Pages;
 
+import Util.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,7 @@ public class ProfilePage {
     WebElement emailOnProfile;
 
     public String getEmailFromProfile() {
+        WebDriverManager.waitUntilVisible(driver, emailOnProfile);
         return emailOnProfile.getText();
     }
 }

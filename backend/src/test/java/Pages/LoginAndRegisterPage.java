@@ -6,10 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+import java.util.concurrent.TimeUnit;
+
+public class LoginAndRegisterPage {
     WebDriver driver;
 
-    public LoginPage(WebDriver driver) {
+    public LoginAndRegisterPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -56,10 +58,17 @@ public class LoginPage {
     }
 
     public boolean hasLogoutButton(){
+        WebDriverManager.waitUntilVisible(driver, logoutButton);
         return logoutButton.isDisplayed();
     }
 
+    public boolean hasProfileButton(){
+        WebDriverManager.waitUntilVisible(driver, profileButton);
+        return profileButton.isDisplayed();
+    }
+
     public boolean hasLoginButton() {
+        WebDriverManager.waitUntilVisible(driver, loginButton);
         return loginButton.isDisplayed();
     }
 }
